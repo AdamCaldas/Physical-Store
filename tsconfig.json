@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    
+        "target": "ES6",               // Mantém a versão moderna do JavaScript
+        "module": "CommonJS",          // Padrão para Node.js
+        "rootDir": "./src",            // Define a pasta de entrada do código TypeScript
+        "outDir": "./dist",            // Define a pasta de saída do código compilado
+        "strict": true,                // Ativa verificações rigorosas de tipagem
+        "esModuleInterop": true,       // Permite importar módulos CommonJS de forma mais fácil
+        "forceConsistentCasingInFileNames": true,  // Evita problemas com nomes de arquivos
+        "skipLibCheck": true           // Ignora verificação de arquivos de bibliotecas
+      
+    }
+                             /* Skip type checking all .d.ts files. */
+}
+
