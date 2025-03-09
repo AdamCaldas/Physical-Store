@@ -18,21 +18,20 @@ export async function findStores(req: Request, res: Response) {
     logger.info('Busca de lojas iniciada', { cep, latitude, longitude });
 
     const stores = await getAllStores();
-    const nearbyStores = stores
+    const storesWithDistance = stores
       .map(store => ({
         ...store,
         distance: calculateDistance(latitude, longitude, store.latitude, store.longitude)
       }))
-      .filter(store => store.distance <= 100)
-      .sort((a, b) => a.distance - b.distance);
+      .sort((a, b) => a.distance - b.distance); 
 
-    if (nearbyStores.length === 0) {
-      logger.warn('Nenhuma loja encontrada no raio de 100km', { cep });
-      return res.status(200).json({ message: 'Nenhuma loja encontrada em um raio de 100km' });
+    if (storesWithDistance.length === 0) {
+      logger.warn('Nenhuma loja encontrada', { cep });
+      return res.status(200).json({ message: 'Nenhuma loja encontrada' });
     }
 
-    logger.info('Lojas encontradas', { count: nearbyStores.length, cep });
-    res.status(200).json(nearbyStores);
+    logger.info('Lojas encontradas', { count: storesWithDistance.length, cep });
+    res.status(200).json(storesWithDistance); 
   } catch (error) {
     logger.error('Erro ao buscar lojas', { error: (error as Error).message, cep });
     res.status(500).json({ message: 'Erro ao processar a solicitação' });
