@@ -6,6 +6,8 @@ export interface Store {
   street: string;
   number: string;
   cep: string;
+  city: string;        
+  neighborhood: string; 
   latitude: number;
   longitude: number;
 }
